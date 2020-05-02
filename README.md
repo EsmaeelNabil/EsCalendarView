@@ -75,3 +75,25 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
     }
 }
 ```
+
+# gradle
+```gradle
+        name="includeToday"               ------->      boolean
+        name="itemSize"                   ------->      dimension
+        name="previousMonthTextSize"      ------->      dimension
+        name="currentMonthTextSize"       ------->      dimension
+        name="dayNumberTextSize"          ------->      dimension
+        name="dayNameTextSize"            ------->      dimension
+        name="monthNameTextSize"          ------->      dimension    
+        name="previousMonthTextColor"     ------->      color
+        name="currentMonthTextColor"      ------->      color
+        name="normalDayNumberTextColor"   ------->      color
+        name="selectedDayNumberTextColor" ------->      color
+        name="normalDayNameTextColor"     ------->      color
+        name="selectedDayNameTextColor"   ------->      color
+        name="normalMonthNameTextColor"   ------->      color
+        name="selectedMonthNameTextColor" ------->      color
+        name="calendarBackgroundColor"    ------->      color
+        name="normalDayBackgroundColor"   ------->      color
+        name="selectedDayBackgroundColor" ------->      color
+```  
