@@ -56,10 +56,12 @@ We must wrap one or more views that we want to transform.
 
 ```
 
-# Java implementaion
+# Kotlin implementaion
 
 ```gradle
-override fun onCreate(savedInstanceState: Bundle?) {
+class MainActivity : AppCompatActivity(), EsCalendarListener {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -70,4 +72,5 @@ override fun onCreate(savedInstanceState: Bundle?) {
     override fun onDateSelectedListener(model: DateModel?, position: Int) {
         Toast.makeText(applicationContext, model?.apiDate, Toast.LENGTH_LONG).show();
     }
+}
 ```
