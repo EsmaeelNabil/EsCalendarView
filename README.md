@@ -24,7 +24,8 @@ dependencies {
 ```
 
 ## Usage
-Add following XML namespace inside your XML layout file.
+
+Add following XML inside your XML layout file.
 
 
 ### EsCalendarView XML
