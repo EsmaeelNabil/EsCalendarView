@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EsCalendarView">
+        <attr name="itemSize" format="dimension" />
+
+        <attr name="previousMonthTextColor" format="color" />
+
+        <attr name="currentMonthTextColor" format="color" />
+
+        <attr name="previousMonthTextSize" format="dimension" />
+        <attr name="currentMonthTextSize" format="dimension" />
+
+
+        <attr name="dayNumberTextSize" format="dimension" />
+        <attr name="dayNameTextSize" format="dimension" />
+        <attr name="monthNameTextSize" format="dimension" />
+
+        <attr name="normalDayNumberTextColor" format="color" />
+        <attr name="selectedDayNumberTextColor" format="color" />
+
+        <attr name="normalDayNameTextColor" format="color" />
+        <attr name="selectedDayNameTextColor" format="color" />
+
+
+        <attr name="normalMonthNameTextColor" format="color" />
+        <attr name="selectedMonthNameTextColor" format="color" />
+
+
+        <attr name="calendarBackgroundColor" format="color" />
+        <attr name="normalDayBackgroundColor" format="color" />
+        <attr name="selectedDayBackgroundColor" format="color" />
+
+
+        <attr name="includeToday" format="boolean" />
+
+    </declare-styleable>
+</resources>

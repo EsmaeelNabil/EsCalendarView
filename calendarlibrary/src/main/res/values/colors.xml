@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    <color name="colorAccent">#028DB6</color>-->
+    <!--    <color name="colorPrimary">#339933</color>-->
+    <!--    <color name="colorPrimaryDark">#036885</color>-->
+
+    <color name="colorAccent">#028DB6</color>
+    <color name="colorPrimary">#02B0E4</color>
+    <color name="colorPrimaryDark">#036885</color>
+
+
+    <!--reds-->
+    <color name="md_red_500">#F44336</color>
+    <color name="md_red_600">#E53935</color>
+    <color name="md_red_900">#B71C1C</color>
+    <color name="md_red_mat">#D74A4A</color>
+    <color name="grey_icon_background">#30000000</color>
+
+    <!-- pinks -->
+
+    <!-- purples -->
+
+    <!-- deep purples -->
+
+    <!-- indigo -->
+    <color name="blueGray300">#90A4AE</color>
+
+    <!--blue-->
+    <color name="md_blue_600">#1E88E5</color>
+    <color name="md_blue_800">#1565C0</color>
+
+    <!-- light blue-->
+
+    <!-- cyan -->
+
+    <!-- teal -->
+
+    <!-- green -->
+    <color name="green">#4CAF50</color>
+    <color name="md_green_500">#4CAF50</color>
+
+    <!--light green-->
+    <color name="md_light_green_500">#8BC34A</color>
+    <color name="md_light_green_A700">#08D0E6</color>
+    <color name="color_green_buttons">#2D9946</color>
+    <color name="green_sixty">#99339933</color>
+
+
+    <!-- lime-->
+
+    <!--yellow -->
+    <color name="md_yellow_600">#FDD835</color>
+
+    <!--amber-->
+
+    <!--orange-->
+
+    <!--deep orange-->
+
+    <!--brown -->
+
+    <!--grey-->
+    <color name="md_grey_50">#FAFAFA</color>
+    <color name="md_grey_100">#F5F5F5</color>
+    <color name="md_grey_200">#F2F2F2</color>
+    <color name="md_grey_300">#E0E0E0</color>
+    <color name="md_grey_transparent">#D1D0D0</color>
+    <color name="nav_icon_colors">#898989</color>
+    <color name="md_grey_500">#9E9E9E</color>
+    <color name="md_grey_900">#3C3C3C</color>
+
+    <color name="md_black_1000">#000000</color>
+    <color name="md_black_transparent_seventy">#70000000</color>
+    <color name="md_black_transparent_5seventy">#BE000000</color>
+
+    <color name="black_little">#D52C2C2C</color>
+
+    <color name="white_transparent_seventy">#70ffffff</color>
+
+    <color name="md_white_1000">#ffffff</color>
+    <color name="white_transparent">#BFFFFFFF</color>
+    <color name="white_transparent50">#80FFFFFF</color>
+
+
+    <color name="black">#000000</color>
+    <color name="black_light">#504d4d</color>
+    <color name="white">#ffffff</color>
+    <color name="white_light">#ede8e8</color>
+    <color name="white_trans">#b1ede8e8</color>
+    <color name="white_transperent">#4cffffff</color>
+    <color name="transperent">#19ffffff</color>
+    <color name="hint">#808080</color>
+    <color name="shadowColor">#947c2c5b</color>
+    <color name="button_gradient_color_dark">#e63e3e</color>
+    <color name="button_gradient_color_light">#e55b5c</color>
+    <!--blue grey-->
+    <color name="md_blue_grey_200">#B0BBC5</color>
+    <color name="app_color">#AE2352</color>
+    <color name="header_black">#222222</color>
+    <color name="background_gray">#7295989A</color>
+    <color name="greenOffers">#339933</color>
+    <color name="new_blue">#082645</color>
+    <color name="divider_service">#DDDDDD</color>
+    <color name="fill_hotel_list">#222222</color>
+    <color name="light_gray">#9E222222</color>
+    <color name="greenRoom">#83C183</color>
+    <color name="gray_color">#A0A0A0</color>
+    <color name="green_60">#99339933</color>
+    <color name="material_room_green">#99339933</color>
+    <color name="whitecolor">#FFFFFF</color>
+    <color name="graywhite">#FAFAFA</color>
+    <color name="grayprocessed">#95989A</color>
+    <color name="creemy_red">#e95378</color>
+    <color name="creemy_white">#ecfdfd</color>
+</resources>

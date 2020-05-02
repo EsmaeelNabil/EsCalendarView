@@ -1,0 +1,49 @@
+<resources>
+
+    <style name="FullScreen" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@android:color/white</item>
+        //this is the statusbar color
+        <item name="android:textColorHint">#A09E9E</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+        // default background color
+        <item name="colorPrimary">@color/app_color</item>
+
+        // default text color
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">#F0EFEF</item>
+        <item name="colorSecondary">#AF2C2C</item>
+        <item name="colorSecondaryVariant">#E33939</item>
+        <!--        <item name="android:colorBackground">#FFFFFF</item>-->
+        <!--        <item name="colorSurface">@color/white</item>-->
+        <!--        <item name="colorError">@color/app_color</item>-->
+        <!--        <item name="colorOnSecondary">@color/white</item>-->
+        <!--        <item name="colorOnBackground">@color/white</item>-->
+        <!--        <item name="colorOnSurface">@color/white</item>-->
+        <!--        <item name="colorOnError">@color/white</item>-->
+        <!--        <item name="android:fontFamily">@font/newfont</item>-->
+        <!--        <item name="fontFamily">@font/newfont</item>-->
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:textDirection">locale</item>
+
+    </style>
+
+    <style name="allCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="topLeftBottomRight">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+
+    <style name="bottomLeftCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">60dp</item>
+    </style>
+
+</resources>
