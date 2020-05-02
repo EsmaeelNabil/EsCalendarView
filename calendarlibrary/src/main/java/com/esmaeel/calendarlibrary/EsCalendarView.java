@@ -104,6 +104,8 @@ public class EsCalendarView extends LinearLayout {
 
         includeToday = typedArray.getBoolean(R.styleable.EsCalendarView_includeToday, false);
 
+        daysCount = (int) typedArray.getDimension(R.styleable.EsCalendarView_daysCount,daysCount);
+
         previousMonthTextColor = typedArray.getColor(R.styleable.EsCalendarView_previousMonthTextColor, getResources().getColor(R.color.black));
         if (binder != null)
             binder.prevMonth.setTextColor(previousMonthTextColor);
@@ -307,6 +309,8 @@ public class EsCalendarView extends LinearLayout {
     private DateModel getSelectedCalendar() {
         return selectedModel;
     }
+
+
 
 
     protected static class EsAttrs {
