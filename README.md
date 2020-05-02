@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
 }
 ```
 
-# gradle
+# Attribues you can use in XML
 ```gradle
         name="includeToday"               ------->      boolean
         name="itemSize"                   ------->      dimension
