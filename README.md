@@ -4,8 +4,9 @@ highly Customizable Horizontal future Calendar view starts from today for select
 ![sample.gif](git-assets/sample.gif)
 
 ## Including in your project
-[![Download](https://api.bintray.com/packages/devmagician/maven/transformationlayout/images/download.svg) ](https://bintray.com/devmagician/maven/transformationlayout/_latestVersion)
-[![JitPack](https://jitpack.io/v/skydoves/TransformationLayout.svg)](https://jitpack.io/#skydoves/TransformationLayout)
+[![Download](git-assets/download.svg) ](git-assets/calendarView.apk)
+[![JitPack](git-assets/jitpack.svg)](https://jitpack.io/#EsmaeelNabil/EsCalendarView)
+[calendarView.apk](git-assets/calendarView.apk)
 ### Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
 ```gradle
@@ -27,10 +28,7 @@ dependencies {
 
 Add following XML inside your XML layout file.
 
-
 ### EsCalendarView XML
-Here is a basic example of implementing `TransformationLayout`. <br>
-We must wrap one or more views that we want to transform.
 
 ```gradle
 <com.esmaeel.calendarlibrary.EsCalendarView
@@ -57,7 +55,7 @@ We must wrap one or more views that we want to transform.
 
 ```
 
-# Kotlin implementaion
+# implementaion
 
 ```gradle
 class MainActivity : AppCompatActivity(), EsCalendarListener {
@@ -78,13 +76,14 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
 
 # Attribues you can use in XML
 ```gradle
+        name="DaysCount"               ------->      Int
         name="includeToday"               ------->      boolean
-        name="itemSize"                   ------->      dimension
-        name="previousMonthTextSize"      ------->      dimension
-        name="currentMonthTextSize"       ------->      dimension
-        name="dayNumberTextSize"          ------->      dimension
-        name="dayNameTextSize"            ------->      dimension
-        name="monthNameTextSize"          ------->      dimension    
+        name="itemSize"                   ------->      Int ( dp / _sdp )
+        name="previousMonthTextSize"      ------->      Int ( dp / _sdp )
+        name="currentMonthTextSize"       ------->      Int ( dp / _sdp )
+        name="dayNumberTextSize"          ------->      Int ( dp / _sdp )
+        name="dayNameTextSize"            ------->      Int ( dp / _sdp )
+        name="monthNameTextSize"          ------->      Int ( dp / _sdp )    
         name="previousMonthTextColor"     ------->      color
         name="currentMonthTextColor"      ------->      color
         name="normalDayNumberTextColor"   ------->      color
