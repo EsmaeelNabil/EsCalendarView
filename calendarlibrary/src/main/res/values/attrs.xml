@@ -33,7 +33,7 @@
 
 
         <attr name="includeToday" format="boolean" />
-        <attr name="daysCount" format="dimension" />
+        <attr name="daysCount" format="integer" />
 
     </declare-styleable>
 </resources>

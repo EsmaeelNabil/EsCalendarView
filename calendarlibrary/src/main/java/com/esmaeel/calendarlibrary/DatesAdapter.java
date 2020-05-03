@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class DatesAdapter extends RecyclerView.Adapter<DatesAdapter.Holder> {
 
     static ArrayList<DateModel> datesList;
-    EsCalendarView.EsAttrs esAttrs;
+    EsAttrs esAttrs;
 
     public static OnDateSelectedInterface mOnDateSelectedInterface;
 
@@ -30,7 +30,7 @@ public class DatesAdapter extends RecyclerView.Adapter<DatesAdapter.Holder> {
         this.mOnDateSelectedInterface = onDateSelectedInterface;
     }
 
-    public void reDraw(EsCalendarView.EsAttrs esAttrs) {
+    public void reDraw(EsAttrs esAttrs) {
         this.esAttrs = esAttrs;
         notifyDataSetChanged();
     }
@@ -75,7 +75,7 @@ public class DatesAdapter extends RecyclerView.Adapter<DatesAdapter.Holder> {
             this.binder = binder;
         }
 
-        public void bindViews(DateModel dateModel, EsCalendarView.EsAttrs esAttrs) {
+        public void bindViews(DateModel dateModel, EsAttrs esAttrs) {
 
             /* updating the item size */
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) binder.rootCard.getLayoutParams();

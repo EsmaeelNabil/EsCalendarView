@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.ViewTreeObserver;
@@ -26,6 +27,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class EsCalendarView extends LinearLayout {
@@ -90,6 +96,29 @@ public class EsCalendarView extends LinearLayout {
         initializeCalendar();
 
         getAttributes(attrs);
+
+        populateDates(daysCount);
+    }
+
+    private void populateDates(Integer daysCount) {
+        Single.just(getDates(daysCount))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<ArrayList<DateModel>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<DateModel> dateModels) {
+                        Timber.e(datesList.toString());
+                        adapter.setDatesList(datesList);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                });
     }
 
     @Override
@@ -98,14 +127,16 @@ public class EsCalendarView extends LinearLayout {
         binder = null;
     }
 
+    private static final String TAG = "EsCalendarView";
 
     private void getAttributes(AttributeSet attrs) {
         final TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.EsCalendarView, 0, 0);
 
-        includeToday = typedArray.getBoolean(R.styleable.EsCalendarView_includeToday, false);
+        this.includeToday = typedArray.getBoolean(R.styleable.EsCalendarView_includeToday, false);
 
-        daysCount = (int) typedArray.getDimension(R.styleable.EsCalendarView_daysCount,daysCount);
-
+        Log.e(TAG, "include today : " + includeToday);
+        this.daysCount = (int) typedArray.getInt(R.styleable.EsCalendarView_daysCount, daysCount);
+        Log.e(TAG, " daysCount : " + daysCount);
         previousMonthTextColor = typedArray.getColor(R.styleable.EsCalendarView_previousMonthTextColor, getResources().getColor(R.color.black));
         if (binder != null)
             binder.prevMonth.setTextColor(previousMonthTextColor);
@@ -221,7 +252,6 @@ public class EsCalendarView extends LinearLayout {
                 }
         });
 
-        fillData(daysCount);
     }
 
 
@@ -288,8 +318,8 @@ public class EsCalendarView extends LinearLayout {
     @NotNull /* if the day is like that -> 9 becomes like this 09 */
     private String getDayWithZero(PrimeCalendar civilCalendar) {
         return String.valueOf(civilCalendar.getDayOfMonth()).length() == 1 ? "0" +
-                civilCalendar.getDayOfMonth()
-                : String.valueOf(civilCalendar.getDayOfMonth());
+                                                                             civilCalendar.getDayOfMonth()
+                                                                           : String.valueOf(civilCalendar.getDayOfMonth());
     }
 
     @NotNull
@@ -305,169 +335,46 @@ public class EsCalendarView extends LinearLayout {
         return positionsList;
     }
 
-    @Deprecated
-    private DateModel getSelectedCalendar() {
-        return selectedModel;
+
+    public DateModel getSelectedCalendar() {
+        return selectedModel == null ? datesList == null ? new DateModel().getDummyMe() : datesList.get(0) : selectedModel;
     }
 
+    private ArrayList<DateModel> getDates(Integer dateCounts) {
+        PrimeCalendar todayCalendar = CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH);
+        Date date = new Date();
+        todayCalendar.setTime(date);
 
 
+        for (Integer count = 0; count < dateCounts; count++) {
 
-    protected static class EsAttrs {
-        private Integer itemSize = 60; //sdp
-        private Integer dayNumberTextSize = 20; //ssp
-        private Integer dayNameTextSize = 10; //ssp
-        private Integer monthNameTextSize = 10; //ssp
+            // include today in the calendar
+            if (includeToday) {
+                if (count > 0) // skipp first day from incrementing to include it
+                    todayCalendar.add(Calendar.DAY_OF_MONTH, 1);
+            } else {
+                todayCalendar.add(Calendar.DAY_OF_MONTH, 1);
+            }
 
-        /*md_grey_300*/
-        private Integer normalDayNumberTextColor;
-        /*white*/
-        private Integer selectedDayNumberTextColor;
-        /*md_grey_300*/
-        private Integer normalDayNameTextColor;
-        /*white*/
-        private Integer selectedDayNameTextColor;
-        /*md_grey_300*/
-        private Integer normalMonthNameTextColor;
-        /*white*/
-        private Integer selectedMonthNameTextColor;
-        /*white*/
-        private Integer normalDayBackgroundColor;
-        /*app_color*/
-        private Integer selectedDayBackgroundColor;
-        /*transparent*/
-        private Integer calendarBackgroundColor;
+            todayCalendar.add(Calendar.MONTH, 0);
+            todayCalendar.add(Calendar.YEAR, 0);
 
-        public EsAttrs() {
+            datesList.add(
+                    new DateModel(
+                            count,
+                            todayCalendar,
+                            todayCalendar.getWeekDayNameShort(),
+                            getDayWithZero(todayCalendar),
+                            getCurrentMonth(todayCalendar),
+                            getPrevMonth(todayCalendar),
+                            count == 0   /* Means if today then select it */,
+                            todayCalendar.getShortDateString()
+                    )
+            );
+
         }
 
-        public EsAttrs(Integer itemSize, Integer dayNumberTextSize, Integer dayNameTextSize, Integer monthNameTextSize, Integer normalDayNumberTextColor, Integer selectedDayNumberTextColor, Integer normalDayNameTextColor, Integer selectedDayNameTextColor, Integer normalMonthNameTextColor, Integer selectedMonthNameTextColor, Integer normalDayBackgroundColor, Integer selectedDayBackgroundColor, Integer calendarBackgroundColor) {
-            this.itemSize = itemSize;
-            this.dayNumberTextSize = dayNumberTextSize;
-            this.dayNameTextSize = dayNameTextSize;
-            this.monthNameTextSize = monthNameTextSize;
-            this.normalDayNumberTextColor = normalDayNumberTextColor;
-            this.selectedDayNumberTextColor = selectedDayNumberTextColor;
-            this.normalDayNameTextColor = normalDayNameTextColor;
-            this.selectedDayNameTextColor = selectedDayNameTextColor;
-            this.normalMonthNameTextColor = normalMonthNameTextColor;
-            this.selectedMonthNameTextColor = selectedMonthNameTextColor;
-            this.normalDayBackgroundColor = normalDayBackgroundColor;
-            this.selectedDayBackgroundColor = selectedDayBackgroundColor;
-            this.calendarBackgroundColor = calendarBackgroundColor;
-        }
+        return datesList;
 
-        public Integer getItemSize() {
-            return itemSize;
-        }
-
-        public void setItemSize(Integer itemSize) {
-            this.itemSize = itemSize;
-        }
-
-        public Integer getDayNumberTextSize() {
-            return dayNumberTextSize;
-        }
-
-        public void setDayNumberTextSize(Integer dayNumberTextSize) {
-            this.dayNumberTextSize = dayNumberTextSize;
-        }
-
-        public Integer getDayNameTextSize() {
-            return dayNameTextSize;
-        }
-
-        public void setDayNameTextSize(Integer dayNameTextSize) {
-            this.dayNameTextSize = dayNameTextSize;
-        }
-
-        public Integer getMonthNameTextSize() {
-            return monthNameTextSize;
-        }
-
-        public void setMonthNameTextSize(Integer monthNameTextSize) {
-            this.monthNameTextSize = monthNameTextSize;
-        }
-
-        public Integer getNormalDayNumberTextColor() {
-            return normalDayNumberTextColor;
-        }
-
-        public void setNormalDayNumberTextColor(Integer normalDayNumberTextColor) {
-            this.normalDayNumberTextColor = normalDayNumberTextColor;
-        }
-
-        public Integer getSelectedDayNumberTextColor() {
-            return selectedDayNumberTextColor;
-        }
-
-        public void setSelectedDayNumberTextColor(Integer selectedDayNumberTextColor) {
-            this.selectedDayNumberTextColor = selectedDayNumberTextColor;
-        }
-
-        public Integer getNormalDayNameTextColor() {
-            return normalDayNameTextColor;
-        }
-
-        public void setNormalDayNameTextColor(Integer normalDayNameTextColor) {
-            this.normalDayNameTextColor = normalDayNameTextColor;
-        }
-
-        public Integer getSelectedDayNameTextColor() {
-            return selectedDayNameTextColor;
-        }
-
-        public void setSelectedDayNameTextColor(Integer selectedDayNameTextColor) {
-            this.selectedDayNameTextColor = selectedDayNameTextColor;
-        }
-
-        public Integer getNormalMonthNameTextColor() {
-            return normalMonthNameTextColor;
-        }
-
-        public void setNormalMonthNameTextColor(Integer normalMonthNameTextColor) {
-            this.normalMonthNameTextColor = normalMonthNameTextColor;
-        }
-
-        public Integer getSelectedMonthNameTextColor() {
-            return selectedMonthNameTextColor;
-        }
-
-        public void setSelectedMonthNameTextColor(Integer selectedMonthNameTextColor) {
-            this.selectedMonthNameTextColor = selectedMonthNameTextColor;
-        }
-
-        public Integer getNormalDayBackgroundColor() {
-            return normalDayBackgroundColor;
-        }
-
-        public void setNormalDayBackgroundColor(Integer normalDayBackgroundColor) {
-            this.normalDayBackgroundColor = normalDayBackgroundColor;
-        }
-
-        public Integer getSelectedDayBackgroundColor() {
-            return selectedDayBackgroundColor;
-        }
-
-        public void setSelectedDayBackgroundColor(Integer selectedDayBackgroundColor) {
-            this.selectedDayBackgroundColor = selectedDayBackgroundColor;
-        }
-
-        public Integer getCalendarBackgroundColor() {
-            return calendarBackgroundColor;
-        }
-
-        public void setCalendarBackgroundColor(Integer calendarBackgroundColor) {
-            this.calendarBackgroundColor = calendarBackgroundColor;
-        }
-
-        /*
-         * returns the item size / 2 to get the perfect circle.
-         * */
-        public float getRadius() {
-            return getItemSize() == null ? 40f : (getItemSize() / 2);
-        }
     }
-
-
 }

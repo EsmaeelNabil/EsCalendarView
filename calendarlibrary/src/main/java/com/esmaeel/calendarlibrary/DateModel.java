@@ -1,6 +1,10 @@
 package com.esmaeel.calendarlibrary;
 
 import com.aminography.primecalendar.PrimeCalendar;
+import com.aminography.primecalendar.common.CalendarFactory;
+import com.aminography.primecalendar.common.CalendarType;
+
+import java.util.Locale;
 
 public class DateModel {
     private Integer uniqeId;
@@ -95,6 +99,14 @@ public class DateModel {
     }
 
     public DateModel() {
+    }
+
+    public DateModel(PrimeCalendar date) {
+        this.date = date;
+    }
+
+    public DateModel getDummyMe(){
+        return new DateModel(CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH));
     }
 
     public DateModel(Integer uniqeId, PrimeCalendar date, String name, String number, String currentMonth, String prevMonth, Boolean selected, String apiDate) {
