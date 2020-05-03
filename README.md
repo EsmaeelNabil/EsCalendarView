@@ -20,7 +20,7 @@ allprojects {
 And add a dependency code to your **APP**'s `build.gradle` file.
 ```gradle
 dependencies {
-	  implementation 'com.github.EsmaeelNabil:EsCalendarView:1.0'
+	  implementation 'com.github.EsmaeelNabil:EsCalendarView:1.1'
 }
 ```
 
