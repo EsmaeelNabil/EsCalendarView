@@ -35,6 +35,10 @@ public class DatesAdapter extends RecyclerView.Adapter<DatesAdapter.Holder> {
         notifyDataSetChanged();
     }
 
+    public void reset() {
+        datesList = new ArrayList<>();
+    }
+
     public interface OnDateSelectedInterface {
         void onDateSelectedClickListener(DateModel model, int position);
     }

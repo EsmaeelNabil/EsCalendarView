@@ -24,7 +24,7 @@
         app:dayNameTextSize="@dimen/_2ssp"
         app:dayNumberTextSize="@dimen/_5ssp"
         app:includeToday="true"
-        app:daysCount="20"
+        app:daysCount="3"
         app:itemSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

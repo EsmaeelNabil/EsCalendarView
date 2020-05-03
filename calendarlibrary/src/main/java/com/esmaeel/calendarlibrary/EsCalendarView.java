@@ -21,6 +21,7 @@ import com.aminography.primecalendar.common.CalendarType;
 import com.esmaeel.calendarlibrary.databinding.CalendarViewBinding;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -260,8 +261,11 @@ public class EsCalendarView extends LinearLayout {
         esAttrs = new EsAttrs();
     }
 
-    public void setDaysCount(Integer daysCount) {
+    @TestOnly
+    private void setDaysCount(Integer daysCount) {
         this.daysCount = daysCount == null ? 120 : daysCount;
+        adapter.reset();
+        populateDates(daysCount);
         postInvalidate();
     }
 
@@ -337,7 +341,8 @@ public class EsCalendarView extends LinearLayout {
 
 
     public DateModel getSelectedCalendar() {
-        return selectedModel == null ? datesList == null ? new DateModel().getDummyMe() : datesList.get(0) : selectedModel;
+        return selectedModel == null ? datesList == null ? new DateModel().getDummyMe()
+                                                         : datesList.get(0) : selectedModel;
     }
 
     private ArrayList<DateModel> getDates(Integer dateCounts) {
@@ -358,6 +363,9 @@ public class EsCalendarView extends LinearLayout {
 
             todayCalendar.add(Calendar.MONTH, 0);
             todayCalendar.add(Calendar.YEAR, 0);
+
+
+            Timber.e(todayCalendar.getShortDateString());
 
             datesList.add(
                     new DateModel(

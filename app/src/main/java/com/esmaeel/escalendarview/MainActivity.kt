@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
 
         getit.setOnClickListener {
             ToastUtils.showShort(myCalendar.selectedCalendar?.apiDate)
-
+            myCalendar.setDaysCount(6)
         }
     }
 
