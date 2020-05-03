@@ -76,10 +76,10 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
 
 # Attribues you can use in XML
 ```gradle
-        name="DaysCount"               ------->      Int
-        name="includeToday"               ------->      boolean
-        name="itemSize"                   ------->      Int ( dp / _sdp )
-        name="previousMonthTextSize"      ------->      Int ( dp / _sdp )
+        name="DaysCount"                  ------->      Int
+        name="includeToday"               ------->      boolean           : show today at first
+        name="itemSize"                   ------->      Int ( dp / _sdp ) : Circle size of the item
+        name="previousMonthTextSize"      ------->      Int ( dp / _sdp ) 
         name="currentMonthTextSize"       ------->      Int ( dp / _sdp )
         name="dayNumberTextSize"          ------->      Int ( dp / _sdp )
         name="dayNameTextSize"            ------->      Int ( dp / _sdp )
