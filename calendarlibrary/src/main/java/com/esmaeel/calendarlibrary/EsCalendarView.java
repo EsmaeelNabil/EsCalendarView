@@ -33,6 +33,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class EsCalendarView extends LinearLayout {
     private Context mContext;
@@ -230,6 +231,8 @@ public class EsCalendarView extends LinearLayout {
 
         binder.datesRecycler.setHasFixedSize(true);
         binder.datesRecycler.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
+        OverScrollDecoratorHelper.setUpOverScroll(binder.datesRecycler, OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL);
+
         adapter = new DatesAdapter();
         binder.datesRecycler.setAdapter(adapter);
 
