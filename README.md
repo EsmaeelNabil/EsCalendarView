@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
 
 # Attribues you can use in XML
 ```gradle
+
+        name="arabicSupport"              ------->      boolean
         name="DaysCount"                  ------->      Int
         name="includeToday"               ------->      boolean           : show today at first
         name="itemSize"                   ------->      Int ( dp / _sdp ) : Circle size of the item
