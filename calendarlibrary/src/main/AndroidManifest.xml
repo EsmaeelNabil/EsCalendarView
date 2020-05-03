@@ -3,7 +3,6 @@
     package="com.esmaeel.calendarlibrary">
 
     <application
-        android:theme="@style/FullScreen"
         android:allowBackup="true" />
 
 </manifest>

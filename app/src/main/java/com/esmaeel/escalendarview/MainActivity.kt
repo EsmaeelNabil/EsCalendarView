@@ -3,6 +3,7 @@ package com.esmaeel.escalendarview
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.aminography.primecalendar.PrimeCalendar
 import com.blankj.utilcode.util.ToastUtils
 import com.esmaeel.calendarlibrary.DateModel
 import com.esmaeel.calendarlibrary.EsCalendarListener
@@ -18,11 +19,14 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
         myCalendar.setOnDateSelectedListener(this)
 
         getit.setOnClickListener {
-            ToastUtils.showShort(myCalendar.selectedCalendar?.apiDate)
+            val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
+            ToastUtils.showShort("${calendar?.dayOfMonth}")
         }
     }
 
     override fun onDateSelectedListener(model: DateModel?, position: Int) {
-        Toast.makeText(applicationContext, model?.apiDate, Toast.LENGTH_LONG).show();
+//        Toast.makeText(applicationContext, model?.apiDate, Toast.LENGTH_LONG).show();
+        val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
+        ToastUtils.showShort("${calendar?.shortDateString}")
     }
 }

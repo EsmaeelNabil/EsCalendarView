@@ -33,7 +33,6 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class EsCalendarView extends LinearLayout {
     private Context mContext;
@@ -52,6 +51,7 @@ public class EsCalendarView extends LinearLayout {
 
     EsAttrs esAttrs;
     boolean includeToday = false;
+    boolean arabicSupport = true;
 
     protected Integer previousMonthTextColor; /*md_blue_800*/
     protected Integer currentMonthTextColor; /*black*/
@@ -112,7 +112,7 @@ public class EsCalendarView extends LinearLayout {
 
                     @Override
                     public void onSuccess(ArrayList<DateModel> dateModels) {
-                        Timber.e(datesList.toString());
+                        Log.e(TAG, "onSuccess: : " + datesList.toString());
                         adapter.setDatesList(datesList);
                     }
 
@@ -134,7 +134,14 @@ public class EsCalendarView extends LinearLayout {
         final TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.EsCalendarView, 0, 0);
 
         this.includeToday = typedArray.getBoolean(R.styleable.EsCalendarView_includeToday, false);
-
+        this.arabicSupport = typedArray.getBoolean(R.styleable.EsCalendarView_arabicSupport, true);
+        if (!arabicSupport) {
+            this.setLayoutDirection(LAYOUT_DIRECTION_LTR);
+            if (binder != null) {
+                binder.currentMonth.setLayoutDirection(LAYOUT_DIRECTION_LTR);
+                binder.prevMonth.setLayoutDirection(LAYOUT_DIRECTION_LTR);
+            }
+        }
         Log.e(TAG, "include today : " + includeToday);
         this.daysCount = (int) typedArray.getInt(R.styleable.EsCalendarView_daysCount, daysCount);
         Log.e(TAG, " daysCount : " + daysCount);
@@ -217,7 +224,7 @@ public class EsCalendarView extends LinearLayout {
 
 
     private DateModel selectedModel;
-    private int selectedPosition;
+    private Integer selectedPosition;
 
     private void initializeCalendar() {
 
@@ -229,6 +236,7 @@ public class EsCalendarView extends LinearLayout {
 
         adapter.setOnDateSelectedListener((model, position) -> {
             selectedModel = model;
+            selectedPosition = position;
             binder.prevMonth.setText(model.getPrevMonth());
             binder.currentMonth.setText(model.getCurrentMonth());
             if (esCalendarListener != null)
@@ -270,44 +278,27 @@ public class EsCalendarView extends LinearLayout {
     }
 
 
-    private void fillData(Integer dateCounts) {
-        PrimeCalendar todayCalendar = CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH);
-        Date date = new Date();
-        todayCalendar.setTime(date);
-
-        for (Integer count = 0; count < 120; count++) {
-
-            // include today in the calendar
-            if (includeToday) {
-                if (count != 0) // skipp first day from incrementing to include it
-                    todayCalendar.add(Calendar.DAY_OF_MONTH, 1);
-            } else {
-                todayCalendar.add(Calendar.DAY_OF_MONTH, 1);
-            }
-
-            todayCalendar.add(Calendar.MONTH, 0);
-            todayCalendar.add(Calendar.YEAR, 0);
-
-            datesList.add(
-                    new DateModel(
-                            count,
-                            todayCalendar,
-                            todayCalendar.getWeekDayNameShort(),
-                            getDayWithZero(todayCalendar),
-                            getCurrentMonth(todayCalendar),
-                            getPrevMonth(todayCalendar),
-                            count == 0   /* Means if today then select it */,
-                            todayCalendar.getShortDateString()
-                    )
-            );
-        }
-
-        Timber.e(datesList.toString());
-        adapter.setDatesList(datesList);
+    private PrimeCalendar getNewCalendarInstance() {
+        return arabicSupport
+               ? CalendarFactory.newInstance(CalendarType.CIVIL, Utils.getLocal(getContext()))
+               : CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH);
     }
 
+    /**
+     * ''' for not overriding the new times in the old calendars '''
+     *
+     * @param newTime the time of the calendar in the for loop
+     * @return a new PrimeCalendar instance with the new time
+     */
+    private PrimeCalendar getNewCalendarInstanceWithThisTime(Date newTime) {
+        PrimeCalendar instance = getNewCalendarInstance();
+        instance.setTime(newTime);
+        return instance;
+    }
+
+
     private String getPrevMonth(PrimeCalendar todayCalendar) {
-        PrimeCalendar prevCalendar = CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH);
+        PrimeCalendar prevCalendar = getNewCalendarInstance();
         prevCalendar.setTime(todayCalendar.getTime());
         prevCalendar.roll(Calendar.MONTH, false);
 
@@ -340,13 +331,30 @@ public class EsCalendarView extends LinearLayout {
     }
 
 
+    /*
+     * return the selected model
+     * */
     public DateModel getSelectedCalendar() {
         return selectedModel == null ? datesList == null ? new DateModel().getDummyMe()
                                                          : datesList.get(0) : selectedModel;
     }
 
+    /*
+     * returns the selected position in the @param datesList
+     */
+    public Integer getSelectedPosition() {
+        return selectedPosition == null ? 0 : selectedPosition;
+    }
+
+    /*
+     * returns the wanted dates models, or an empty array
+     * */
+    public ArrayList<DateModel> getDatesList() {
+        return datesList == null ? new ArrayList<>() : datesList;
+    }
+
     private ArrayList<DateModel> getDates(Integer dateCounts) {
-        PrimeCalendar todayCalendar = CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH);
+        PrimeCalendar todayCalendar = getNewCalendarInstance();
         Date date = new Date();
         todayCalendar.setTime(date);
 
@@ -365,19 +373,13 @@ public class EsCalendarView extends LinearLayout {
             todayCalendar.add(Calendar.YEAR, 0);
 
 
-            Timber.e(todayCalendar.getShortDateString());
+//            Timber.e(todayCalendar.getShortDateString());
+//            Log.e(TAG, "include today : " + includeToday);
+            Log.e(TAG, "getDates: " + todayCalendar.getShortDateString());
+
 
             datesList.add(
-                    new DateModel(
-                            count,
-                            todayCalendar,
-                            todayCalendar.getWeekDayNameShort(),
-                            getDayWithZero(todayCalendar),
-                            getCurrentMonth(todayCalendar),
-                            getPrevMonth(todayCalendar),
-                            count == 0   /* Means if today then select it */,
-                            todayCalendar.getShortDateString()
-                    )
+                    getDateModel(todayCalendar, count)
             );
 
         }
@@ -385,4 +387,25 @@ public class EsCalendarView extends LinearLayout {
         return datesList;
 
     }
+
+    @NotNull
+    private DateModel getDateModel(PrimeCalendar todayCalendar, Integer count) {
+
+        return new DateModel(
+                count, /* a unique id for the recycler's getItemId*/
+                getNewCalendarInstanceWithThisTime(todayCalendar.getTime()),
+                todayCalendar.getWeekDayNameShort(),
+                getDayWithZero(todayCalendar),
+                getCurrentMonth(todayCalendar),
+                getPrevMonth(todayCalendar),
+                count == 0   /* Means if today then select it */,
+
+                /* if arabic supported
+                 then change apiDate to english chars
+                 for the sake of those Backend Developers whom can understand nothing but FUCKING ENGLISH!*/
+                arabicSupport ? Utils.digitsFromARToEN(todayCalendar.getShortDateString())
+                              : todayCalendar.getShortDateString()
+        );
+    }
+
 }

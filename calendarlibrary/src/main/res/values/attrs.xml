@@ -35,5 +35,7 @@
         <attr name="includeToday" format="boolean" />
         <attr name="daysCount" format="integer" />
 
+        <attr name="arabicSupport" format="boolean" />
+
     </declare-styleable>
 </resources>
