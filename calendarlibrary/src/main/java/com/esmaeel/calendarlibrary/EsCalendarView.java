@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.ViewTreeObserver;
@@ -81,6 +80,7 @@ public class EsCalendarView extends LinearLayout {
     protected Integer selectedDayBackgroundColor;
     /*transparent*/
     protected Integer calendarBackgroundColor;
+    protected String dateSplitChar = "-"; /* default split for Dates */
 
     public void setOnDateSelectedListener(EsCalendarListener esCalendarListener) {
         this.esCalendarListener = esCalendarListener;
@@ -113,7 +113,7 @@ public class EsCalendarView extends LinearLayout {
 
                     @Override
                     public void onSuccess(ArrayList<DateModel> dateModels) {
-                        Log.e(TAG, "onSuccess: : " + datesList.toString());
+//                        Log.e(TAG, "onSuccess: : " + datesList.toString());
                         adapter.setDatesList(datesList);
                     }
 
@@ -134,6 +134,10 @@ public class EsCalendarView extends LinearLayout {
     private void getAttributes(AttributeSet attrs) {
         final TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.EsCalendarView, 0, 0);
 
+        /*date split -> 2020/5/4  ---> 2020-5-4*/
+        String splitter = typedArray.getString(R.styleable.EsCalendarView_dateSplitChar);
+        this.dateSplitChar = isValid(splitter) ? splitter : dateSplitChar;
+
         this.includeToday = typedArray.getBoolean(R.styleable.EsCalendarView_includeToday, false);
         this.arabicSupport = typedArray.getBoolean(R.styleable.EsCalendarView_arabicSupport, true);
         if (!arabicSupport) {
@@ -143,9 +147,9 @@ public class EsCalendarView extends LinearLayout {
                 binder.prevMonth.setLayoutDirection(LAYOUT_DIRECTION_LTR);
             }
         }
-        Log.e(TAG, "include today : " + includeToday);
+//        Log.e(TAG, "include today : " + includeToday);
         this.daysCount = (int) typedArray.getInt(R.styleable.EsCalendarView_daysCount, daysCount);
-        Log.e(TAG, " daysCount : " + daysCount);
+//        Log.e(TAG, " daysCount : " + daysCount);
         previousMonthTextColor = typedArray.getColor(R.styleable.EsCalendarView_previousMonthTextColor, getResources().getColor(R.color.black));
         if (binder != null)
             binder.prevMonth.setTextColor(previousMonthTextColor);
@@ -221,6 +225,10 @@ public class EsCalendarView extends LinearLayout {
             adapter.reDraw(esAttrs);
 
         typedArray.recycle();
+    }
+
+    private boolean isValid(String splitter) {
+        return splitter != null;
     }
 
 
@@ -378,7 +386,7 @@ public class EsCalendarView extends LinearLayout {
 
 //            Timber.e(todayCalendar.getShortDateString());
 //            Log.e(TAG, "include today : " + includeToday);
-            Log.e(TAG, "getDates: " + todayCalendar.getShortDateString());
+//            Log.e(TAG, "getDates: " + todayCalendar.getShortDateString());
 
 
             datesList.add(
@@ -406,9 +414,15 @@ public class EsCalendarView extends LinearLayout {
                 /* if arabic supported
                  then change apiDate to english chars
                  for the sake of those Backend Developers whom can understand nothing but FUCKING ENGLISH!*/
-                arabicSupport ? Utils.digitsFromARToEN(todayCalendar.getShortDateString())
-                              : todayCalendar.getShortDateString()
+                getApiDate(todayCalendar)
         );
+    }
+
+    @NotNull
+    private String getApiDate(PrimeCalendar todayCalendar) {
+        return arabicSupport
+               ? Utils.digitsFromARToEN(todayCalendar.getShortDateString()).replace("/", dateSplitChar)
+               : todayCalendar.getShortDateString().replace("/", dateSplitChar);
     }
 
 }

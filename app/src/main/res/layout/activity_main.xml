@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/md_yellow_600"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <com.esmaeel.calendarlibrary.EsCalendarView
-        app:previousMonthTextSize="@dimen/_5ssp"
-        app:previousMonthTextColor="@color/md_grey_900"
-        app:currentMonthTextColor="@color/white"
-        app:currentMonthTextSize="@dimen/_5ssp"
-        android:paddingTop="8dp"
         android:id="@+id/myCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        app:arabicSupport="false"
+        app:currentMonthTextColor="@color/white"
+        app:currentMonthTextSize="@dimen/_5ssp"
         app:dayNameTextSize="@dimen/_2ssp"
         app:dayNumberTextSize="@dimen/_5ssp"
-        app:includeToday="true"
         app:daysCount="10"
+        app:includeToday="true"
         app:itemSize="@dimen/_40sdp"
-        app:arabicSupport="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:normalDayBackgroundColor="@color/creemy_red"
+        app:previousMonthTextColor="@color/md_grey_900"
+        app:previousMonthTextSize="@dimen/_5ssp"
+        app:dateSplitChar="~"
+        app:selectedDayBackgroundColor="@color/white"
         app:selectedDayNameTextColor="@color/header_black"
-        app:selectedDayNumberTextColor="@color/black_light"
-        app:selectedDayBackgroundColor="@color/white" />
+        app:selectedDayNumberTextColor="@color/black_light" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/getit"
+        app:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Get it"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:padding="10dp"
+        android:layout_margin="40dp"
+        app:cornerRadius="10dp" />
 </LinearLayout>

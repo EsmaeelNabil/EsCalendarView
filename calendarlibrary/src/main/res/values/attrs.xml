@@ -37,5 +37,7 @@
 
         <attr name="arabicSupport" format="boolean" />
 
+        <attr name="dateSplitChar" format="string" />
+
     </declare-styleable>
 </resources>

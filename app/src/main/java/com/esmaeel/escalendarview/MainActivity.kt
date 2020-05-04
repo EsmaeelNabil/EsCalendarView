@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
     override fun onDateSelectedListener(model: DateModel?, position: Int) {
 //        Toast.makeText(applicationContext, model?.apiDate, Toast.LENGTH_LONG).show();
         val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
-        ToastUtils.showShort("${calendar?.shortDateString}")
+//        ToastUtils.showShort("${calendar?.shortDateString}")
+        ToastUtils.showShort("${model?.apiDate}")
+
     }
 }

@@ -61,5 +61,5 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.blankj:utilcodex:1.27.6'
     implementation 'me.everything:overscroll-decor-android:1.0.4'
-
+    
 }

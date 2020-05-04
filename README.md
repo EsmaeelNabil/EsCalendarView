@@ -77,9 +77,10 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
 # Attribues you can use in XML
 ```gradle
 
-        name="arabicSupport"              ------->      boolean
+        name="arabicSupport"              ------->      boolean           : for supporting arabic & Rtl or not : default = true
+        name="dateSplitChar"              ------->      String            : ( -, /, any char ) to change the date splitter
         name="DaysCount"                  ------->      Int
-        name="includeToday"               ------->      boolean           : show today at first
+        name="includeToday"               ------->      boolean           : show today at first : default = false
         name="itemSize"                   ------->      Int ( dp / _sdp ) : Circle size of the item
         name="previousMonthTextSize"      ------->      Int ( dp / _sdp ) 
         name="currentMonthTextSize"       ------->      Int ( dp / _sdp )
