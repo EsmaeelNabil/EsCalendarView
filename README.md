@@ -1,7 +1,7 @@
 # EsCalendarView
 highly Customizable Horizontal future Calendar view starts from today for selections in the future.
 
-![sample.gif](git-assets/sample.gif) | ![sample2.gif](git-assets/sample2.gif)
+| ![sample.gif](git-assets/sample.gif) | ![sample2.gif](git-assets/sample2.gif) |
 
 ## Including in your project
 [![Download](git-assets/download.svg) ](git-assets/calendarView.apk)
