@@ -258,6 +258,8 @@ public class EsCalendarView extends LinearLayout {
         RecyclerViewPositionHelper helper = new RecyclerViewPositionHelper(binder.datesRecycler);
         ViewTreeObserver observer = binder.datesRecycler.getViewTreeObserver();
         observer.addOnScrollChangedListener(() -> {
+            if (binder == null)
+                return;
             if (datesList != null)
                 if (!datesList.isEmpty()) {
                     /*if the selected date is visible, then update views according to it */
