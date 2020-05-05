@@ -16,19 +16,19 @@ class MainActivity : AppCompatActivity(), EsCalendarListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        myCalendar.setOnDateSelectedListener(this)
+//        myCalendar.setOnDateSelectedListener(this)
 
-        getit.setOnClickListener {
-            val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
-            ToastUtils.showShort("${calendar?.dayOfMonth}")
-        }
+//        getit.setOnClickListener {
+//            val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
+//            ToastUtils.showShort("${calendar?.dayOfMonth}")
+//        }
     }
 
     override fun onDateSelectedListener(model: DateModel?, position: Int) {
 //        Toast.makeText(applicationContext, model?.apiDate, Toast.LENGTH_LONG).show();
-        val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
+//        val calendar: PrimeCalendar? = myCalendar.selectedCalendar?.date;
 //        ToastUtils.showShort("${calendar?.shortDateString}")
-        ToastUtils.showShort("${model?.apiDate}")
+//        ToastUtils.showShort("${model?.apiDate}")
 
     }
 }
