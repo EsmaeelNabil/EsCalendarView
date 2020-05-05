@@ -268,6 +268,8 @@ public class EsCalendarView extends LinearLayout {
                         binder.prevMonth.setText(datesList.get(adapter.getSelectedPosition()).getPrevMonth());
                     } else {
                         /* the selected date is NOT visible, so we update views according to first item visible */
+                        if (helper.findFirstVisibleItemPosition() < 0)
+                            return;
                         binder.currentMonth.setText(datesList.get(helper.findFirstVisibleItemPosition()).getCurrentMonth());
                         binder.prevMonth.setText(datesList.get(helper.findFirstVisibleItemPosition()).getPrevMonth());
                     }
