@@ -5,9 +5,7 @@ highly Customizable Horizontal future Calendar view starts from today for select
 | ![sample.gif](git-assets/sample.gif) | ![sample2.gif](git-assets/sample2.gif) |
 
 ## Including in your project
-//[![Download](git-assets/download.svg) ](git-assets/calendarView.apk)
 [![](https://jitpack.io/v/EsmaeelNabil/EsCalendarView.svg)](https://jitpack.io/#EsmaeelNabil/EsCalendarView)
-//[calendarView.apk](git-assets/calendarView.apk)
 ### Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
 ```gradle
