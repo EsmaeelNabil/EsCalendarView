@@ -39,5 +39,8 @@
 
         <attr name="dateSplitChar" format="string" />
 
+        <attr name="hidePreviousMonth" format="boolean" />
+        <attr name="hideCurrentMonth" format="boolean" />
+
     </declare-styleable>
 </resources>

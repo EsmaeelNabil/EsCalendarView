@@ -53,6 +53,9 @@ public class EsCalendarView extends LinearLayout {
     boolean includeToday = false;
     boolean arabicSupport = true;
 
+    boolean hidePreviousMonth = false;
+    boolean hideCurrentMonth = false;
+
     protected Integer previousMonthTextColor; /*md_blue_800*/
     protected Integer currentMonthTextColor; /*black*/
     protected Integer previousMonthTextSize = 14; //ssp
@@ -147,6 +150,13 @@ public class EsCalendarView extends LinearLayout {
                 binder.prevMonth.setLayoutDirection(LAYOUT_DIRECTION_LTR);
             }
         }
+
+        this.hideCurrentMonth = typedArray.getBoolean(R.styleable.EsCalendarView_hideCurrentMonth, false);
+        this.hidePreviousMonth = typedArray.getBoolean(R.styleable.EsCalendarView_hidePreviousMonth, false);
+        if (binder != null) {
+            binder.prevMonth.setVisibility(hidePreviousMonth ? GONE : VISIBLE);
+            binder.currentMonth.setVisibility(hideCurrentMonth ? GONE : VISIBLE);
+        }
 //        Log.e(TAG, "include today : " + includeToday);
         this.daysCount = (int) typedArray.getInt(R.styleable.EsCalendarView_daysCount, daysCount);
 //        Log.e(TAG, " daysCount : " + daysCount);
@@ -162,7 +172,7 @@ public class EsCalendarView extends LinearLayout {
         if (binder != null)
             binder.currentMonth.setTextColor(currentMonthTextColor);
 
-        currentMonthTextSize = (int) typedArray.getDimension(R.styleable.EsCalendarView_previousMonthTextSize, currentMonthTextSize);
+        currentMonthTextSize = (int) typedArray.getDimension(R.styleable.EsCalendarView_currentMonthTextSize, currentMonthTextSize);
         if (binder != null)
             binder.currentMonth.setTextSize(TypedValue.COMPLEX_UNIT_SP, currentMonthTextSize);
 
