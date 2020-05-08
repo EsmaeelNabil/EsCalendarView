@@ -29,6 +29,8 @@ public class Utils {
 
 
     public static String digitsFromARToEN(String value) {
+        if (value == null || value.isEmpty())
+            return "";
         return value.replace("٠", "0")
                 .replace("١", "1")
                 .replace("٢", "2")

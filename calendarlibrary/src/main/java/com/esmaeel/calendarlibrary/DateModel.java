@@ -21,7 +21,7 @@ public class DateModel {
     }
 
     public String getApiDate() {
-        return apiDate;
+        return Utils.digitsFromARToEN(apiDate);
     }
 
     public void setApiDate(String apiDate) {
@@ -31,15 +31,15 @@ public class DateModel {
     @Override
     public String toString() {
         return "DateModel{" +
-               "uniqeId=" + uniqeId +
-               ", date=" + date +
-               ", name='" + name + '\'' +
-               ", number='" + number + '\'' +
-               ", currentMonth='" + currentMonth + '\'' +
-               ", prevMonth='" + prevMonth + '\'' +
-               ", selected=" + selected +
-               ", apiDate='" + apiDate + '\'' +
-               '}';
+                "uniqeId=" + uniqeId +
+                ", date=" + date +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", currentMonth='" + currentMonth + '\'' +
+                ", prevMonth='" + prevMonth + '\'' +
+                ", selected=" + selected +
+                ", apiDate='" + apiDate + '\'' +
+                '}';
     }
 
     public Integer getUniqeId() {
@@ -105,7 +105,7 @@ public class DateModel {
         this.date = date;
     }
 
-    public DateModel getDummyMe(){
+    public DateModel getDummyMe() {
         return new DateModel(CalendarFactory.newInstance(CalendarType.CIVIL, Locale.ENGLISH));
     }
 

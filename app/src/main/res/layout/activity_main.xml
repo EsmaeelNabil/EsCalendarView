@@ -23,6 +23,7 @@
         app:dayNumberTextSize="@dimen/_5ssp"
         app:daysCount="10"
         app:includeToday="true"
+        app:hidePreviousMonth="true"
         app:itemSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
