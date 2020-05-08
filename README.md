@@ -19,7 +19,7 @@ allprojects {
 And add a dependency code to your **APP**'s `build.gradle` file. [![](https://jitpack.io/v/EsmaeelNabil/EsCalendarView.svg)](https://jitpack.io/#EsmaeelNabil/EsCalendarView)
 ```gradle
 dependencies {
-	  implementation 'com.github.EsmaeelNabil:EsCalendarView:1.9'
+	  implementation 'com.github.EsmaeelNabil:EsCalendarView:2.0'
 }
 ```
 
