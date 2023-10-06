@@ -57,7 +57,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
     implementation 'com.aminography:primecalendar:1.2.18'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.blankj:utilcodex:1.27.6'
     implementation 'me.everything:overscroll-decor-android:1.0.4'
